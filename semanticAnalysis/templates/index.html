@@ -1,0 +1,106 @@
+{% extends 'base.html'%}
+{% block title %} HOME{% endblock title %}
+
+{% block body %}
+<style>
+    .jumbotron {
+        padding-top: 3rem;
+        /* padding-bottom: 3rem; */
+        margin-bottom: 0;
+        background-color: #fff;
+    }
+
+    @media (min-width: 768px) {
+        .jumbotron {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+    }
+
+    .jumbotron p:last-child {
+        margin-bottom: 0;
+    }
+
+    .jumbotron-heading {
+        font-weight: 300;
+    }
+
+    .jumbotron .container {
+        max-width: 40rem;
+    }
+</style>
+
+{% if user.is_authenticated %}
+<p style="color: white ;"> Welcome &nbsp <strong>{{ request.user}} &nbsp &nbsp </strong></p>
+{% endif %}
+<div class="jumbotron container">
+    <form method="POST">
+        <div class="input-group mb-3">
+            {% csrf_token %}
+
+            <input type="text" name="semantictext" class="form-control" aria-label="Username">
+        </div>
+        <p>
+            <button type="submit" name="submit" value="search" class="btn btn-primary my-2">Get Semantic Score</button>
+        </p>
+    </form>
+</div>
+
+
+
+<div class="container">
+
+    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-1 g-1">
+
+        {% for s in semantic %}
+
+        <div class="col">
+            <div class="card shadow-sm">
+                <!-- <h3>{{i.title}}</h3> -->
+                <h3 class="m-2">{{s.semantictext}}</h3>
+
+
+                {% if s.POSITIVE_SCORE < 0.5  %}
+                    <h4 class="text-center">Your text so sad. you should be happy!!!!</h4>
+                    <img src="https://source.unsplash.com/600x500/?happy" height="400px"  class="d-block w-100" alt="...">
+                {% endif %}
+
+
+                {% if s.POSITIVE_SCORE > 0.5  %}
+                    <h4 class="text-center" >Your text score is happy. Stay happy bro.
+                        Come on. Let's Party!!!</h4>
+                    <img src="https://source.unsplash.com/600x500/?party" height="400px"  class="d-block w-100" alt="...">
+                {% endif %}
+
+
+                <div class="card-body">
+                    <p class="card-text">POSITIVE SCORE={{s.POSITIVE_SCORE}}</p>
+                    <p class="card-text">NEGATIVE SCORE={{s.NEGATIVE_SCORE}}</p>
+                    <p class="card-text">POLARITY SCORE={{s.POLARITY_SCORE}}</p>
+                    <p class="card-text">SUBJECTIVITY SCORE={{s.SUBJECTIVITY_SCORE}}</p>
+                    <p class="card-text">AVG SENTENCE LENGTH={{s.AVG_SENTENCE_LENGTH}}</p>
+                    <p class="card-text">PERCENTAGE OF COMPLEX_WORDS={{s.PERCENTAGE_OF_COMPLEX_WORDS}}</p>
+                    <p class="card-text">FOG INDEX={{s.FOG_INDEX}}</p>
+                    <p class="card-text">AVG NUMBER OF WORDS PER SENTENCE={{s.AVG_NUMBER_OF_WORDS_PER_SENTENCE}}</p>
+                    <p class="card-text">COMPLEX WORD COUNT={{s.COMPLEX_WORD_COUNT}}</p>
+                    <p class="card-text">WORD COUNT={{s.WORD_COUNT}}</p>
+                    <p class="card-text">SYLLABLE PER WORD={{s.SYLLABLE_PER_WORD}}</p>
+                    <p class="card-text">PERSONAL PRONOUNS={{s.PERSONAL_PRONOUNS}}</p>
+                    <p class="card-text">AVG WORD LENGTH={{s.AVG_WORD_LENGTH}}</p>
+
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                        </div>
+                        <!-- <small class="text-muted">{{i.minRead}}mins</small> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock body %}
