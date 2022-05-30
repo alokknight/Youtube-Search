@@ -31,7 +31,6 @@ requirements_helper.py
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-
 .env
 env/
 env
@@ -279,6 +278,7 @@ google_forms/media/
 
 .pytest_cache/
 .envs/
+
 db.sqlite3
 
 .gitattributes

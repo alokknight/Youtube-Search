@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import django_heroku
 import environ
 import datetime
 from decouple import config
-
+from pathlib import Path
 env = environ.Env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,10 +26,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "!-%338t&jqcqx%inqn=m5gg&5rx$m7*pmgiezcdtcg$2=%l+mx"
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG")
+
 
 ALLOWED_HOSTS = ['mlapis.herokuapp.com','127.0.0.1','localhost']
 
@@ -108,31 +110,31 @@ WSGI_APPLICATION = "backend.wsgi.application"
 #         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
 #     }
 # }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         "CLIENT": {
-#         "name": config('DB_NAME'),##database
-#         "host": config('DB_HOST'),
-#         "username": config('DB_USER'),##username
-#         "password": config('DB_PASSWORD'),##password of that database user
-#         "authMechanism": "SCRAM-SHA-1",
-#         },
-#     }
-# }
-
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         "CLIENT": {
-        "name": env('DB_NAME',default='mlapis'),##database
-        "host": env('DB_HOST',default='mongodb://alokpatel885:alokpatel885@cluster0-shard-00-00.redg6.mongodb.net:27017,cluster0-shard-00-01.redg6.mongodb.net:27017,cluster0-shard-00-02.redg6.mongodb.net:27017/mlapis?ssl=true&replicaSet=atlas-11t00w-shard-0&authSource=admin&retryWrites=true&w=majority'),
-        "username": env('DB_USER',default='alokpatel885'),##username
-        "password": env('DB_PASSWORD',default='alokpatel885'),##password of that database user
+        "name": config('DB_NAME'),##database
+        "host": config('DB_HOST'),
+        "username": config('DB_USER'),##username
+        "password": config('DB_PASSWORD'),##password of that database user
         "authMechanism": "SCRAM-SHA-1",
         },
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         "CLIENT": {
+#         "name": env('DB_NAME',default='mlapis'),##database
+#         "host": env('DB_HOST',default='mongodb://alokpatel885:alokpatel885@cluster0-shard-00-00.redg6.mongodb.net:27017,cluster0-shard-00-01.redg6.mongodb.net:27017,cluster0-shard-00-02.redg6.mongodb.net:27017/mlapis?ssl=true&replicaSet=atlas-11t00w-shard-0&authSource=admin&retryWrites=true&w=majority'),
+#         "username": env('DB_USER',default='alokpatel885'),##username
+#         "password": env('DB_PASSWORD',default='alokpatel885'),##password of that database user
+#         "authMechanism": "SCRAM-SHA-1",
+#         },
+#     }
+# }
 
 
 # Password validation
@@ -214,11 +216,11 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
-EMAIL_USE_TLS = True
-EMAIL_HOST = "smtp.gmail.com"
-EMAIL_PORT = 587
-EMAIL_HOST_USER = "coderpapaa@gmail.com"
-EMAIL_HOST_PASSWORD = "aalokknight@gmail.com"
+EMAIL_USE_TLS       = True
+EMAIL_HOST          = "smtp.gmail.com"
+EMAIL_PORT          = 587
+EMAIL_HOST_USER     = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -239,3 +241,4 @@ AUTH_USER_MODEL = "authentication.User"
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = "/static/"
+django_heroku.settings(locals())
