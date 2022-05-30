@@ -16,7 +16,7 @@
             <img src='{% static "Images/logo.jpg"%}' alt="Logo">
         </div>
         <ul>
-            <li class="item"><a href="">Home</a></li>
+            <li class="item"><a href="/">Home</a></li>
             <li class="item"><a href="#form">Form</a></li>
             <li class="item"><a href="#wines-container">Best WHISKY</a></li>
             <li class="item"><a href="#client-section">Our Clients</a></li>
@@ -32,7 +32,8 @@
     <section id="form">
         <h2 class="h-primary center"> Fill the details</h2>
         <div id="form-box">
-            <form action="/" method="post">{% csrf_token %}
+            <form action="{% url 'whiskyApp:whisky' %}" method="post">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for = "alchohol_content">Alchohol Content: </label><br>
                     <input type="Number" name="alchohol_content" id="alchohol_content" placeholder="Enter a Number" step="0.01" min="0" max="1000" required="true">

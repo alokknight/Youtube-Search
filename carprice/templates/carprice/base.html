@@ -30,43 +30,50 @@ body {
     {% comment %} <a class="navbar-brand" href="http://www.linkedin.com/in/alokknight">ALOK</a> {% endcomment %}
     <a class="navbar-brand" href="/about/">ALOK</a>
 
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/admin/">admin</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="/apis/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          ML APIs
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="{% url 'carpriceapi' %}">CAR PRICE PREDICTION API</a></li>
+            <li><a class="dropdown-item" href="{% url 'semanticapi' %}">SEMANTIC ANALYSIS API</a></li>
+            <li><a class="dropdown-item" href="{% url 'whiskyapi' %}">WHISKY QUALITY CHECKUP API</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Somthing else</a></li>
+          </ul>
         </li>
 
-
         <li class="nav-item">
-          <a class="nav-link" href="/profile/">My Profile</a>
+          <a class="nav-link" aria-current="page" href="{% url 'semantic' %}">SEMANTIC ANALYSIS</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/projects/">Projects</a>
+          <a class="nav-link" href="{% url 'carprice' %}">CAR PRICE PREDICTION</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/contact/">Contact Us</a>
+          <a class="nav-link" href={% url 'whiskyApp:whisky' %}>WHISKY QUALITY CHECKUP</a>
         </li>
-
-
-
       </ul>
-      <li><a href="#"><i class="fa fa-search "></i></a></li>&nbsp &nbsp
+
 
 
       {% if user.is_authenticated %}
-      <p style="color: white ;"> Welcome &nbsp <strong>&nbsp &nbsp </strong></p>
-      <button class="btn btn-outline-success" onclick="window.location.href='{% url 'logout' %}'" type="logout">Logout</button>
-      <button class="btn btn-outline-success" onclick="window.location.href='{% url 'login' %}'" type="login">login</button>
-      <button class="btn btn-outline-success" onclick="window.location.href='{% url 'register' %}'" type="register">Register</button>
+      <p style="color: white ;"> Welcome &nbsp <strong>{{ request.user}} &nbsp &nbsp </strong></p>
+      <button class="btn btn-outline-success" onclick="window.location.href='/auth/login/'" type="login">Logout</button>
+
       {% else %}
 
-
+      <button class="btn btn-outline-success" onclick="window.location.href='/auth/login/'" type="login">login</button>
+      <button class="btn btn-outline-success" onclick="window.location.href='/auth/register/'" type="login">Register</button>
       {% endif %}
+
 
     </div>
   </div>

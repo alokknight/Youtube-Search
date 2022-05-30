@@ -96,12 +96,12 @@ def carprice(request):
     if request.method == "POST":
         Year=0
 
-        Year            = int  (request.data.get('Year'))
-        Present_Price   = float(request.data.get('Present_Price'))
-        Kms_Driven      = int  (request.data.get('Kms_Driven'))
-        Owner           = int  (request.data.get('Owner'))
+        Year            = int  (request.POST.get('Year'))
+        Present_Price   = float(request.POST.get('Present_Price'))
+        Kms_Driven      = int  (request.POST.get('Kms_Driven'))
+        Owner           = int  (request.POST.get('Owner'))
 
-        Fuel_Type_Petrol= request.data.get("Fuel_Type_Petrol")
+        Fuel_Type_Petrol= request.POST.get("Fuel_Type_Petrol")
         if(Fuel_Type_Petrol=='Petrol'):
             Fuel_Type_Diesel=0
             Fuel_Type_Petrol=1
@@ -116,14 +116,14 @@ def carprice(request):
         Year= date.today().year - Year
         print(Year)
 
-        Seller_Type_Individual=request.data.get('Seller_Type_Individual')
+        Seller_Type_Individual=request.POST.get('Seller_Type_Individual')
         if(Seller_Type_Individual=="Individual"):
             Seller_Type_Individual=1
         else:
             Seller_Type_Individual=0
 
 
-        Transmission_Mannual=request.data.get('Transmission_Mannual')
+        Transmission_Mannual=request.POST.get('Transmission_Mannual')
         if(Transmission_Mannual=='Mannual'):
             Transmission_Mannual=1
         else:

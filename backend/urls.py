@@ -44,13 +44,13 @@ schema_view = get_schema_view(
 urlpatterns = [
     # # API url
     # path("api/", include(router.urls)),
-    path("api/whisky/",WhiskyView.as_view(),name="whiskyapi"),
-    path("api/car/",CarpriceView.as_view() ,name="carpriceapi"),
-    path('api/semantic/', SemanticView.as_view(), name="semantic"),
+    path("api/v1/whisky/",   WhiskyView.as_view(),   name="whiskyapi"),
+    path("api/v1/car/",      CarpriceView.as_view(), name="carpriceapi"),
+    path('api/v1/semantic/', SemanticView.as_view(), name="semanticapi"),
 
     ##
     path('', include('semanticAnalysis.urls')),
-    path('', include('whiskyApp.urls')),
+    path('whisky/', include('whiskyApp.urls')),
     path('carprice/', include('carprice.urls')),
     path("admin/", admin.site.urls),
     path(

@@ -85,19 +85,19 @@ class WhiskyView(views.APIView):
 def index(request):
     if request.method == 'POST':
         # These are all the variables that we obtained from the user through a POST Request.
-        alchohol_content=request.data.get('alchohol_content','default')
-        malic_acid      =request.data.get('malic_acid'      ,'default')
-        Ash             =request.data.get('Ash'             ,'default')
-        alc_ash         =request.data.get('alc_ash'         ,'default')
-        Magnesium       =request.data.get('Magnesium'       ,'default')
-        Phenols         =request.data.get('Phenols'         ,'default')
-        Flavanoid       =request.data.get('Flavanoid'       ,'default')
-        NFPhelons       =request.data.get('NFPhelons'       ,'default')
-        Cyacnins        =request.data.get('Cyacnins'        ,'default')
-        Intensity       =request.data.get('Intensity'       ,'default')
-        Hue             =request.data.get('Hue'             ,'default')
-        OD280           =request.data.get('OD280'           ,'default')
-        Proline         =request.data.get('Proline'         ,'default')
+        alchohol_content=request.POST.get('alchohol_content','default')
+        malic_acid      =request.POST.get('malic_acid'      ,'default')
+        Ash             =request.POST.get('Ash'             ,'default')
+        alc_ash         =request.POST.get('alc_ash'         ,'default')
+        Magnesium       =request.POST.get('Magnesium'       ,'default')
+        Phenols         =request.POST.get('Phenols'         ,'default')
+        Flavanoid       =request.POST.get('Flavanoid'       ,'default')
+        NFPhelons       =request.POST.get('NFPhelons'       ,'default')
+        Cyacnins        =request.POST.get('Cyacnins'        ,'default')
+        Intensity       =request.POST.get('Intensity'       ,'default')
+        Hue             =request.POST.get('Hue'             ,'default')
+        OD280           =request.POST.get('OD280'           ,'default')
+        Proline         =request.POST.get('Proline'         ,'default')
 
         labels=[[
                 float(alchohol_content),
@@ -136,4 +136,5 @@ def index(request):
         # Now rendering our results page with the data.
         return render(request,"whiskyApp/results.html",details)
 
-    return render(request,"whiskyApp/index.html")
+    if request.method == 'GET':
+        return render(request,"whiskyApp/index.html")

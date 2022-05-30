@@ -25,32 +25,39 @@ body {
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    {% comment %} <a class="navbar-brand" href="http://www.linkedin.com/in/alokknight">ALOK</a> {% endcomment %}
-    <a class="navbar-brand" href="/about/">ALOK</a>
+    <a class="navbar-brand" href="http://www.linkedin.com/in/alokknight">ALOK</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="/apis/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          ML APIs
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/api/v1/car/">CAR PRICE PREDICTION API</a></li>
+            <li><a class="dropdown-item" href="/api/v1/semantic/">SEMANTIC ANALYSIS API</a></li>
+            <li><a class="dropdown-item" href="/api/v1/whisky/">WHISKY QUALITY CHECKUP API</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Somthing else</a></li>
+          </ul>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/profile/">My Profile</a>
+          <a class="nav-link" aria-current="page" href="/">SEMANTIC ANALYSIS</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/projects/">Projects</a>
+          <a class="nav-link" href="{% url 'carprice' %}">CAR PRICE PREDICTION</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="/contact/">Contact Us</a>
+          <a class="nav-link" href={% url 'whiskyApp:whisky' %}>WHISKY QUALITY CHECKUP</a>
         </li>
       </ul>
 
-      <li><a href="#"><i class="fa fa-search fa-2x"></i></a></li>&nbsp &nbsp
 
 
       {% if user.is_authenticated %}

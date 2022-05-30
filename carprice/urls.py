@@ -4,7 +4,7 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
 
-app_name='carprice'
+# app_name='carprice'
 # router = routers.DefaultRouter()
 # router.register(r'carprice', views.carprice,'carpriceapi')
 # urlpatterns = carpricerouter.urls
@@ -15,4 +15,4 @@ urlpatterns = [
     path('carpricehome/',views.carpriceHome,name='carpricehome'),
     path('carpriceprediction/', views.carpriceprediction,name='carpriceprediction'),
 ]
-urlpatterns = format_suffix_patterns(urlpatterns)
+# urlpatterns = format_suffix_patterns(urlpatterns)
