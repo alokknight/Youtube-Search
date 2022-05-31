@@ -46,7 +46,7 @@
         <div class="mb-3">
             {% csrf_token %}
             <label for="exampleFormControlTextarea1" class="form-label">Enter your text here.</label>
-            <textarea class="form-control"name="semantictext" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <textarea class="form-control"name="semantictext" id="exampleFormControlTextarea1" rows="5" required="true"></textarea>
         </div>
         <p>
             <button type="submit" name="submit" value="search" class="btn btn-primary my-2">Get Semantic Score</button>

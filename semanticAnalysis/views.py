@@ -152,6 +152,8 @@ def semantic(request):
     # front=FrontPage.objects.all()
     if  request.method=="POST":
         semantictext=request.POST.get('semantictext')
+        if semantictext is None:
+            return render(request, 'index.html')
 
         tokenized_words = tokenize(semantictext)
         words = remove_stopwords(tokenized_words, stop_words)
