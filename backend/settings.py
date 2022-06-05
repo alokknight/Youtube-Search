@@ -33,7 +33,7 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['mlapis.herokuapp.com','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['alokyoutubeapi.herokuapp.com','127.0.0.1','localhost']
 
 
 # Application definition
@@ -309,7 +309,7 @@ CELERY_BEAT_SCHEDULER = "django_celery_beat.schedulers:DatabaseScheduler"
 # CELERY_TASK_TRACK_STARTED = True
 
 
-# django_heroku.settings(locals(),staticfiles=False)
+django_heroku.settings(locals(),staticfiles=False)
 
 YOUTUBE_DATA_API_KEY = config('YOUTUBE_DATA_API_KEY')
 # YOUTUBE_DATA_API_KEY2 = config('YOUTUBE_DATA_API_KEY2')
