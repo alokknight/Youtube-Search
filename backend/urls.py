@@ -20,12 +20,9 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from django.conf.urls.static import static
 from django.conf import settings
-# from carprice.urls import carpricerouter
-# from whiskyApp.urls import whiskyrouter
-from carprice.views import CarpriceView
-from whiskyApp.views import WhiskyView
-from semanticAnalysis.views import SemanticView
-
+from authentication import views
+from rest_framework import routers
+from search.urls import searchrouter
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -43,15 +40,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     # # API url
-    # path("api/", include(router.urls)),
-    path("api/v1/whisky/",   WhiskyView.as_view(),   name="whiskyapi"),
-    path("api/v1/car/",      CarpriceView.as_view(), name="carpriceapi"),
-    path('api/v1/semantic/', SemanticView.as_view(), name="semanticapi"),
-
+    path("api/", include(searchrouter.urls)),
     ##
-    path('', include('semanticAnalysis.urls')),
-    path('whisky/', include('whiskyApp.urls')),
-    path('carprice/', include('carprice.urls')),
+    path('', include(('search.urls','search'), namespace="searchapp")),
     path("admin/", admin.site.urls),
     path(
         "auth/",

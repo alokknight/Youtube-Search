@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 from .views import (
     LogoutAPIView,
@@ -10,12 +10,17 @@ from .views import (
     SetNewPasswordAPIView,
     OwnerListView,
     OwnerUpdateRetriveDeleteView,
+    UserViewSet,
 )
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
+from rest_framework import routers
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
 
 urlpatterns = [
+    path("api/",include(router.urls)),
     path("register/", RegisterView.as_view(), name="register"),
     path("email-verify/", VerifyEmail.as_view(), name="email-verify"),
     path("login/", LoginAPIView.as_view(), name="login"),

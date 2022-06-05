@@ -247,3 +247,13 @@ class LogoutAPIView(generics.GenericAPIView):
         serializer.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+from rest_framework import viewsets
+
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-created_at')
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]

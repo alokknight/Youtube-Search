@@ -1,0 +1,103 @@
+
+{% extends 'search/base.html'%}
+{% block title %}carpriceprediction{% endblock %}
+
+{% load static %}
+{% block body %}
+
+    <main role="main">
+
+      <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">Search YouTube</h1>
+          <p class="lead text-muted">Get the top nine results on YouTube for your query! and We will save that videos in
+            Database.</p>
+          <form method="POST">
+            <div class="input-group mb-3">
+              {% csrf_token %}
+              <input type="text" name="search" class="form-control" aria-label="Username">
+            </div>
+            <p>
+              <button type="submit" name="submit" value="search" class="btn btn-primary my-2">YouTube Search</button>
+              <button type="submit" name="submit" value="lucky" class="btn btn-secondary my-2">I'm Feeling
+                Lucky</button>
+            </p>
+          </form>
+        </div>
+      </section>
+
+      <div>
+        <span class="current text-center">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        <div class="pagination">
+          <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a type="button" href="?page=1"" class=" btn btn-primary my-2">&laquo; first</a>
+            <a type="button" href="?page={{ page_obj.previous_page_number }}"
+              class="btn btn-secondary my-2">previous</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <a type="button" href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary my-2">Next Page</a>
+            <a type="button" href="?page={{ page_obj.paginator.num_pages }}"" class=" btn btn-primary my-2">Last
+              &raquo;</a>
+            {% endif %}
+
+          </span>
+        </div>
+      </div>
+
+
+      <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+
+            {% for video in page_obj %}
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <img class="bd-placeholder-img card-img-top" width="100%" height="200" src="{{ video.thumbURL }}"
+                  preserveAspectRatio="xMidYMid slice" focusable="false" role="img"
+                  aria-label="Placeholder: Thumbnail"></img>
+                <div class="card-body">
+                  <p class="card-text">{{ video.title }}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a type="button" href="{{ video.videoURL }}" class="btn btn-secondary my-2">View</a>
+                      <!-- <a type="button" href="{{ video.videoURL }}" class="btn btn-sm btn-outline-secondary">View</a> -->
+                    </div>
+                    <small class="text-muted">{{ video.publishTime }}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+            
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <span class="current text-center">
+          Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+        <div class="pagination">
+          <span class="step-links">
+            {% if page_obj.has_previous %}
+            <a type="button" href="?page=1"" class=" btn btn-primary my-2">&laquo; first</a>
+            <a type="button" href="?page={{ page_obj.previous_page_number }}"
+              class="btn btn-secondary my-2">previous</a>
+            {% endif %}
+
+            {% if page_obj.has_next %}
+            <a type="button" href="?page={{ page_obj.next_page_number }}" class="btn btn-secondary my-2">Next Page</a>
+            <a type="button" href="?page={{ page_obj.paginator.num_pages }}"" class=" btn btn-primary my-2">Last
+              &raquo;</a>
+            {% endif %}
+
+          </span>
+        </div>
+      </div>
+
+    </main>
+{% endblock body%}
